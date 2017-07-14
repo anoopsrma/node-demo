@@ -4,20 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient
-  , Server = require('mongodb').Server;
-
-var MongoClient = require('mongodb').MongoClient
-
-MongoClient.connect('mongodb://localhost:27017/node', function (err, db) {
-  if (err) throw err
-
-  db.collection('about').find().toArray(function (err, result) {
-    if (err) throw err
-
-    console.log(result)
-  })
-})
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -29,7 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
