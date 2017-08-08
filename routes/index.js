@@ -1,12 +1,5 @@
-
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-
-var uri = 'mongodb://localhost:27017/node';
-
-var options = { promiseLibrary: require('bluebird') };
-var db = mongoose.createConnection(uri, options);
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
@@ -37,6 +30,7 @@ router.post('/login', function (req, res, next) {
 
 
 router.get('/about', function(req, res, next) {
+  var db = req.db
   db.collection('about').find().toArray((err, result) => {
     if (err) return console.log(err)
     res.render('about.hbs', {quotes: result})
